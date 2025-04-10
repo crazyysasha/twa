@@ -21,6 +21,9 @@ part 'src/services/location_manager.dart';
 final TwaInterface _platform = createTwa();
 
 class Twa extends TwaInterface {
+  Twa._();
+  static final Twa instance = Twa._();
+
   @override
   bool get isSupported => _platform.isSupported;
 

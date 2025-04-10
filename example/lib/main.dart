@@ -17,7 +17,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-  final _twaPlugin = Twa();
+
+  final _twaPlugin = Twa.instance;
 
   @override
   void initState() {
