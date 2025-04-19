@@ -16,10 +16,12 @@ class TwaWeb extends TwaInterface {
   bool get isSupported => telegram.webApp.platform.toLowerCase() != 'unknown';
 
   @override
-  WebAppInitData get initData => WebAppInitData.fromRawString(telegram.webApp.initData);
+  WebAppInitData get initData =>
+      WebAppInitData.fromRawString(telegram.webApp.initData);
 
   @override
-  WebAppInitDataUnsafe get initDataUnsafe => telegram.webApp.initDataUnsafe.toDart;
+  WebAppInitDataUnsafe get initDataUnsafe =>
+      telegram.webApp.initDataUnsafe.toDart;
 
   @override
   String get platform => telegram.webApp.platform;
@@ -36,7 +38,10 @@ class TwaWeb extends TwaInterface {
   Future<RequestContactResult> requestContact() async {
     final completer = Completer<RequestContactResult>();
     try {
-      telegram.webApp.requestContact((bool isSent, RequestContactResult result) {
+      telegram.webApp.requestContact((
+        bool isSent,
+        RequestContactResult result,
+      ) {
         completer.complete(result);
       });
     } catch (e) {
@@ -61,6 +66,11 @@ class TwaWeb extends TwaInterface {
   @override
   void ready() {
     return telegram.webApp.ready();
+  }
+
+  @override
+  void disableVerticalSwipes() {
+    return telegram.webApp.disableVerticalSwipesJS();
   }
 }
 
@@ -87,7 +97,9 @@ extension type WebAppJSObject._(JSObject _) implements JSObject {
   @JS("requestContact")
   external JSVoid requestContactJS(JSFunction callback);
 
-  void requestContact(void Function(bool isSent, RequestContactResult result) callback) {
+  void requestContact(
+    void Function(bool isSent, RequestContactResult result) callback,
+  ) {
     requestContactJS(
       (JSBoolean isSent, RequestContactResultJSObject result) {
         callback(isSent.toDart, result.toDart);
@@ -105,6 +117,9 @@ extension type WebAppJSObject._(JSObject _) implements JSObject {
       }.toJS,
     );
   }
+
+  @JS("disableVerticalSwipes")
+  external JSVoid disableVerticalSwipesJS();
 
   external JSVoid ready();
 }
@@ -255,7 +270,13 @@ extension type WebAppChatJSObject._(JSObject _) implements JSObject {
   external String? get username;
   external String? get photoUrl;
 
-  WebAppChat get toDart => WebAppChat(id: id, title: title, type: type, username: username, photoUrl: photoUrl);
+  WebAppChat get toDart => WebAppChat(
+    id: id,
+    title: title,
+    type: type,
+    username: username,
+    photoUrl: photoUrl,
+  );
 }
 
 extension type WebAppUserJSObject._(JSObject _) implements JSObject {
@@ -309,7 +330,8 @@ extension type RequestContactResultJSObject._(JSObject _) implements JSObject {
   );
 }
 
-extension type RequestContactResponseUnsafeJSObject._(JSObject _) implements JSObject {
+extension type RequestContactResponseUnsafeJSObject._(JSObject _)
+    implements JSObject {
   external ContactJSObject get contact;
   @JS('auth_date')
   external String get authDate;
@@ -317,7 +339,11 @@ extension type RequestContactResponseUnsafeJSObject._(JSObject _) implements JSO
   external String get hash;
 
   RequestContactResultResponseUnsafe get toDart =>
-      RequestContactResultResponseUnsafe(contact: contact.toDart, authDate: int.parse(authDate), hash: hash);
+      RequestContactResultResponseUnsafe(
+        contact: contact.toDart,
+        authDate: int.parse(authDate),
+        hash: hash,
+      );
 }
 
 extension type ContactJSObject._(JSObject _) implements JSObject {
@@ -330,6 +356,10 @@ extension type ContactJSObject._(JSObject _) implements JSObject {
   @JS('user_id')
   external int userId;
 
-  TelegramContact get toDart =>
-      TelegramContact(phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, userId: userId);
+  TelegramContact get toDart => TelegramContact(
+    phoneNumber: phoneNumber,
+    firstName: firstName,
+    lastName: lastName,
+    userId: userId,
+  );
 }

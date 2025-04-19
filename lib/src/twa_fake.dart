@@ -48,4 +48,7 @@ class TwaFake extends TwaInterface {
 
   @override
   void ready() {}
+
+  @override
+  void disableVerticalSwipes() {}
 }

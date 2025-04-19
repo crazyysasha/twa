@@ -17,5 +17,7 @@ abstract class TwaInterface {
 
   Future<bool> requestWriteAccess();
 
+  void disableVerticalSwipes();
+
   void ready();
 }
