@@ -51,4 +51,9 @@ class TwaFake extends TwaInterface {
 
   @override
   void disableVerticalSwipes() {}
+
+  @override
+  void requestFullscreen() {}
+  @override
+  void exitFullscreen() {}
 }

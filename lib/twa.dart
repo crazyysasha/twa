@@ -53,10 +53,20 @@ class Twa extends TwaInterface {
   }
 
   @override
-  void ready() => _platform.ready();
-
-  @override
   void disableVerticalSwipes() {
     return _platform.disableVerticalSwipes();
   }
+
+  @override
+  void requestFullscreen() {
+    return _platform.requestFullscreen();
+  }
+
+  @override
+  void exitFullscreen() {
+    return _platform.exitFullscreen();
+  }
+
+  @override
+  void ready() => _platform.ready();
 }

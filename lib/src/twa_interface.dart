@@ -19,5 +19,9 @@ abstract class TwaInterface {
 
   void disableVerticalSwipes();
 
+  void requestFullscreen();
+
+  void exitFullscreen();
+
   void ready();
 }

@@ -64,13 +64,23 @@ class TwaWeb extends TwaInterface {
   }
 
   @override
-  void ready() {
-    return telegram.webApp.ready();
+  void disableVerticalSwipes() {
+    return telegram.webApp.disableVerticalSwipesJS();
   }
 
   @override
-  void disableVerticalSwipes() {
-    return telegram.webApp.disableVerticalSwipesJS();
+  void requestFullscreen() {
+    return telegram.webApp.requestFullscreenJS();
+  }
+
+  @override
+  void exitFullscreen() {
+    return telegram.webApp.exitFullscreenJS();
+  }
+
+  @override
+  void ready() {
+    return telegram.webApp.ready();
   }
 }
 
@@ -120,6 +130,12 @@ extension type WebAppJSObject._(JSObject _) implements JSObject {
 
   @JS("disableVerticalSwipes")
   external JSVoid disableVerticalSwipesJS();
+
+  @JS("requestFullscreen")
+  external JSVoid requestFullscreenJS();
+
+  @JS("exitFullscreen")
+  external JSVoid exitFullscreenJS();
 
   external JSVoid ready();
 }
