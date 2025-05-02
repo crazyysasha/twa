@@ -1,3 +1,5 @@
+import 'package:twa/src/models/safe_area_inset.dart';
+
 import '../twa.dart';
 
 abstract class TwaInterface {
@@ -10,6 +12,10 @@ abstract class TwaInterface {
   String get version;
 
   String get platform;
+
+  SafeAreaInset get safeAreaInset;
+
+  SafeAreaInset get contentSafeAreaInset;
 
   LocationManager get locationManager;
 

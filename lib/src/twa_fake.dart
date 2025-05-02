@@ -1,3 +1,5 @@
+import 'package:twa/src/models/safe_area_inset.dart';
+
 import '../twa.dart';
 
 import 'twa_interface.dart';
@@ -24,6 +26,14 @@ class TwaFake extends TwaInterface {
 
   @override
   String get platform => 'unknown';
+
+  @override
+  SafeAreaInset get safeAreaInset =>
+      const SafeAreaInset(left: 0, top: 0, right: 0, bottom: 0);
+
+  @override
+  SafeAreaInset get contentSafeAreaInset =>
+      const SafeAreaInset(left: 0, top: 0, right: 0, bottom: 0);
 
   @override
   LocationManager get locationManager => LocationManager(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:twa/src/models/safe_area_inset.dart';
 
 import 'src/twa_interface.dart';
 
@@ -38,6 +39,12 @@ class Twa extends TwaInterface {
 
   @override
   String get platform => _platform.platform;
+
+  @override
+  SafeAreaInset get safeAreaInset => _platform.safeAreaInset;
+
+  @override
+  SafeAreaInset get contentSafeAreaInset => _platform.contentSafeAreaInset;
 
   @override
   LocationManager get locationManager => _platform.locationManager;

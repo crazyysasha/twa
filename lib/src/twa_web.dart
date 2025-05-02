@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'dart:js_interop';
 
+import 'package:twa/src/models/safe_area_inset.dart';
+
 import '../twa.dart';
 import 'twa_interface.dart';
 
@@ -28,6 +30,16 @@ class TwaWeb extends TwaInterface {
 
   @override
   String get version => telegram.webApp.version;
+
+  @override
+  SafeAreaInset get safeAreaInset {
+    return telegram.webApp.safeAreaInset.toDart;
+  }
+
+  @override
+  SafeAreaInset get contentSafeAreaInset {
+    return telegram.webApp.contentSafeAreaInset.toDart;
+  }
 
   @override
   LocationManager get locationManager {
@@ -101,6 +113,10 @@ extension type WebAppJSObject._(JSObject _) implements JSObject {
 
   external String get version;
 
+  external SafeAreaInsetJSObject get safeAreaInset;
+
+  external SafeAreaInsetJSObject get contentSafeAreaInset;
+
   @JS('LocationManager')
   external LocationManagerJSObject get locationManager;
 
@@ -138,6 +154,16 @@ extension type WebAppJSObject._(JSObject _) implements JSObject {
   external JSVoid exitFullscreenJS();
 
   external JSVoid ready();
+}
+
+extension type SafeAreaInsetJSObject._(JSObject _) implements JSObject {
+  external double get left;
+  external double get top;
+  external double get right;
+  external double get bottom;
+
+  SafeAreaInset get toDart =>
+      SafeAreaInset(left: left, top: top, right: right, bottom: bottom);
 }
 
 Completer<void>? _locationInitCompleter;
